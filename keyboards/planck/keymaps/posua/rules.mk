@@ -10,3 +10,5 @@ CONSOLE_ENABLE = yes
 
 # free up memory
 AUDIO_ENABLE = no
+
+LAYOUTS = ortho_4x10
