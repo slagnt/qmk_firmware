@@ -1,27 +1,6 @@
-#ifndef CONFIG_USER_H
-#define CONFIG_USER_H
-
-#include "config_common.h"
-
-#undef VENDOR_ID
-#undef PRODUCT_ID
-#undef DEVICE_VER
-#undef MANUFACTURER
-#undef PRODUCT
-#define VENDOR_ID       0xFEED
-#define PRODUCT_ID      0x0001
-#define DEVICE_VER      0x0001
-#define MANUFACTURER    Slg
-#define PRODUCT         Getto Planck
-
-#undef MATRIX_ROW_PINS
-#undef MATRIX_COL_PINS
-#define MATRIX_ROW_PINS { F6, F7, D6, D4 }
-#define MATRIX_COL_PINS { B0, B1, B2, B3, D7, B4, B6, B5, F5, F4, F1, F0 }
+#pragma once
 
 #undef QMK_ESC_OUTPUT
-#undef DIODE_DIRECTION
-#define DIODE_DIRECTION ROW2COL
 
 #define NO_MUSIC_MODE
 
@@ -59,7 +38,6 @@
 /* override number of MIDI tone keycodes (each octave adds 12 keycodes and allocates 12 bytes) */
 //#define MIDI_TONE_KEYCODE_OCTAVES 2
 
-#endif
 
 #ifdef PS2_USE_USART
 #define PS2_CLOCK_PORT  PORTD

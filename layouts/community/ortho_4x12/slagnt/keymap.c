@@ -1,6 +1,7 @@
-#include "planck.h"
+#include QMK_KEYBOARD_H
 #include "action_layer.h"
 #include <print.h>
+#include <string.h>
 
 extern keymap_config_t keymap_config;
 
@@ -16,20 +17,8 @@ enum custom_layers {
 enum custom_keycodes {
   DVORAK = SAFE_RANGE,
   QWERTY,
-  /*
-  NUMBER,
-  PUNCT,
-  NAV,
-  OTHER,
-  */
   RUS,
   ENG,
-  /*
-  DOTCOMM,
-  BSDEL,
-  UC_TEST,
-  LALT_DOT
-  */
   GENPASS,
   PASS1,
   PASS2
@@ -52,19 +41,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |  Nav |      |      | Shift| Punct|Number|Number|  Nav | Shift|      |      |  Nav |
  * `-----------------------------------------------------------------------------------'
  */
-[_DVORAK] = {
-  {LGUI_T(KC_ESC),      KC_X,               KC_C,             KC_V,             KC_P,                 KC_Y,
-   KC_F,                KC_G,               KC_C,             KC_R,             KC_L,                 RGUI_T(XXXXXXX)},
+[_DVORAK] = LAYOUT_ortho_4x12(
+  LGUI_T(KC_ESC),      KC_X,               KC_C,             KC_V,             KC_P,                 KC_Y,
+   KC_F,                KC_G,               KC_C,             KC_R,             KC_L,                 RGUI_T(XXXXXXX),
 
-  {LCTL_T(KC_TAB),      LCTL_T(KC_A),       KC_O,             KC_E,             LCTL_T(KC_U),         KC_I,
-   KC_D,                RCTL_T(KC_H),       KC_T,             KC_N,             RCTL_T(KC_S),         KC_RCTL},
+  LCTL_T(KC_TAB),      LCTL_T(KC_A),       KC_O,             KC_E,             LCTL_T(KC_U),         KC_I,
+   KC_D,                RCTL_T(KC_H),       KC_T,             KC_N,             RCTL_T(KC_S),         KC_RCTL,
 
-  {LALT_T(KC_CLCK),     KC_LALT,            KC_Q,             KC_J,             LALT_T(KC_K),         KC_X,
-   KC_B,                RALT_T(KC_M),       KC_W,             KC_V,             RALT_T(KC_Z),         KC_RALT},
+  LALT_T(KC_CLCK),     KC_LALT,            KC_Q,             KC_J,             LALT_T(KC_K),         KC_X,
+   KC_B,                RALT_T(KC_M),       KC_W,             KC_V,             RALT_T(KC_Z),         KC_RALT,
 
-  {MO(_NAV),            LALT(LCTL(KC_DEL)), XXXXXXX,          KC_LSHIFT,        LT(_PUNCT, KC_BSPC),  LT(_NUMBER, KC_SPC),
-  LT(_NUMBER, KC_SPC),  LT(_NAV, KC_ENT),   KC_RSHIFT,        KC_APP,           LGUI(KC_L),           MO(_NAV)}
-},
+  MO(_NAV),            LALT(LCTL(KC_DEL)), XXXXXXX,          KC_LSHIFT,        LT(_PUNCT, KC_BSPC), LT(_NUMBER, KC_SPC),
+  LT(_NUMBER, KC_SPC),  LT(_NAV, KC_ENT),   KC_RSHIFT,        KC_APP,           LGUI(KC_L),           MO(_NAV))
+,
 
 //LALT_T(KC_DOT)
 //C_S_T(kc)       Left Control and Shift when held, kc when tapped
@@ -87,16 +76,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |      |      |      |      |      |      |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
-[_QWERTY] = {
-  {_______, KC_Q,         KC_W,           KC_E,           KC_R,             KC_T,
-   KC_Y,    KC_U,         KC_I,           KC_O,           KC_P,             RGUI_T(KC_LBRC)},
-  {_______, LCTL_T(KC_A), KC_S,           KC_D,           LCTL_T(KC_F),     KC_G,
-   KC_H,    RCTL_T(KC_J), KC_K,           KC_L,           RCTL_T(KC_SCLN),  RCTL_T(KC_QUOT)},
-  {_______, LALT_T(KC_Z), KC_X,           KC_C,           LALT_T(KC_V),     KC_B,
-   KC_N,    RALT_T(KC_M), KC_COMM,        KC_DOT,         RALT_T(KC_GRV),   RALT_T(KC_RBRC)},
-  {_______, _______,      _______,        _______,        _______,          _______,
-   _______, _______,      _______,        _______,        _______,          _______}
-},
+[_QWERTY] = LAYOUT_ortho_4x12(
+  _______, KC_Q,         KC_W,           KC_E,           KC_R,             KC_T,
+   KC_Y,    KC_U,         KC_I,           KC_O,           KC_P,             RGUI_T(KC_LBRC),
+  _______, LCTL_T(KC_A), KC_S,           KC_D,           LCTL_T(KC_F),     KC_G,
+   KC_H,    RCTL_T(KC_J), KC_K,           KC_L,           RCTL_T(KC_SCLN),  RCTL_T(KC_QUOT),
+  _______, LALT_T(KC_Z), KC_X,           KC_C,           LALT_T(KC_V),     KC_B,
+   KC_N,    RALT_T(KC_M), KC_COMM,        KC_DOT,         RALT_T(KC_GRV),   RALT_T(KC_RBRC),
+  _______, _______,      _______,        _______,        _______,          _______,
+   _______, _______,      _______,        _______,        _______,          _______)
+,
 
 /* Number
  * ,-----------------------------------------------------------------------------------.
@@ -110,12 +99,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 
-[_NUMBER] = {
-  {_______, KC_F1,        KC_F2,   KC_F3,   KC_F4,          KC_PSCR, KC_NLCK, KC_7,         KC_8,    KC_9,     KC_PSLS,         RGUI_T(KC_PAST)},
-  {_______, LCTL_T(KC_F5),KC_F6,   KC_F7,   LCTL_T(KC_F8),  KC_SLCK, KC_DOT,  RCTL_T(KC_4), KC_5,    KC_6,     RCTL_T(KC_PMNS), RCTL_T(KC_PPLS)},
-  {_______, LALT_T(KC_F9),KC_F10,  KC_F11,  LALT_T(KC_F12), KC_PAUS, KC_0,    RALT_T(KC_1), KC_2,    KC_3,     RALT_T(XXXXXXX), _______},
-  {_______, _______,      _______, _______, _______,        _______, _______, _______,      _______, _______,  _______,         _______}
-},
+[_NUMBER] = LAYOUT_ortho_4x12(
+  _______, KC_F1,        KC_F2,   KC_F3,   KC_F4,          KC_PSCR, KC_NLCK, KC_7,         KC_8,    KC_9,     KC_PSLS,         RGUI_T(KC_PAST),
+  _______, LCTL_T(KC_F5),KC_F6,   KC_F7,   LCTL_T(KC_F8),  KC_SLCK, KC_DOT,  RCTL_T(KC_4), KC_5,    KC_6,     RCTL_T(KC_PMNS), RCTL_T(KC_PPLS),
+  _______, LALT_T(KC_F9),KC_F10,  KC_F11,  LALT_T(KC_F12), KC_PAUS, KC_0,    RALT_T(KC_1), KC_2,    KC_3,     RALT_T(XXXXXXX), _______,
+  _______, _______,      _______, _______, _______,        _______, _______, _______,      _______, _______,  _______,         _______)
+,
 
 /* Punct
  * ,-----------------------------------------------------------------------------------.
@@ -129,12 +118,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 
-[_PUNCT] = {
-  {_______, KC_AMPR,KC_PIPE,KC_BSLS,KC_SLSH,KC_PLUS,KC_EQL, KC_LBRC,KC_RBRC,KC_LABK,KC_RABK,KC_CIRC},
-  {_______, KC_TILD,KC_GRV, KC_QUOT,KC_DQUO,KC_UNDS,KC_MINS,KC_LPRN,KC_RPRN,KC_DOT, KC_COMM,KC_DLR},
-  {_______, KC_HASH,KC_QUES,KC_EXLM,KC_ASTR,KC_COLN,KC_SCLN,KC_LCBR,KC_RCBR,KC_AT,  KC_PERC,KC_RALT},
-  {_______, _______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______}
-},
+[_PUNCT] = LAYOUT_ortho_4x12(
+  _______, KC_AMPR,KC_PIPE,KC_BSLS,KC_SLSH,KC_PLUS,KC_EQL, KC_LBRC,KC_RBRC,KC_LABK,KC_RABK,KC_CIRC,
+  _______, KC_TILD,KC_GRV, KC_QUOT,KC_DQUO,KC_UNDS,KC_MINS,KC_LPRN,KC_RPRN,KC_DOT, KC_COMM,KC_DLR,
+  _______, KC_HASH,KC_QUES,KC_EXLM,KC_ASTR,KC_COLN,KC_SCLN,KC_LCBR,KC_RCBR,KC_AT,  KC_PERC,KC_RALT,
+  _______, _______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______)
+,
 
 /* Nav
  * ,-----------------------------------------------------------------------------------.
@@ -148,19 +137,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 
-[_NAV] = {
-  {_______,         XXXXXXX,        XXXXXXX,      ENG,          XXXXXXX,        GENPASS,
-   LCTL(KC_HOME),   KC_HOME,        KC_PGDN,      KC_PGUP,      KC_END,         LCTL(KC_END)},
+[_NAV] = LAYOUT_ortho_4x12(
+  _______,         XXXXXXX,        XXXXXXX,      ENG,          XXXXXXX,        GENPASS,
+   LCTL(KC_HOME),   KC_HOME,        KC_PGDN,      KC_PGUP,      KC_END,         LCTL(KC_END),
 
-  {_______,         LCTL_T(XXXXXXX),XXXXXXX,      RUS,          LCTL_T(XXXXXXX),PASS1,
-   LCTL(KC_LEFT),   RCTL_T(KC_LEFT),KC_DOWN,      KC_UP,        RCTL_T(KC_RGHT),LCTL(KC_RGHT)},
+  _______,         LCTL_T(XXXXXXX),XXXXXXX,      RUS,          LCTL_T(XXXXXXX),PASS1,
+   LCTL(KC_LEFT),   RCTL_T(KC_LEFT),KC_DOWN,      KC_UP,        RCTL_T(KC_RGHT),LCTL(KC_RGHT),
 
-  {_______,         RESET,          DEBUG,        XXXXXXX,      LALT_T(XXXXXXX),PASS2,
-   KC_DEL,          LALT(KC_LEFT),  LALT(KC_DOWN),LALT(KC_UP),  LALT(KC_RGHT),  KC_INS},
+  _______,         RESET,          DEBUG,        XXXXXXX,      LALT_T(XXXXXXX),PASS2,
+   KC_DEL,          LALT(KC_LEFT),  LALT(KC_DOWN),LALT(KC_UP),  LALT(KC_RGHT),  KC_INS,
 
-  {_______,         _______,        _______,      _______,      _______,        _______,
-   _______,         _______,        _______,      _______,      _______,        _______}
-},
+  _______,         _______,        _______,      _______,      _______,        _______,
+   _______,         _______,        _______,      _______,      _______,        _______)
+,
 
 /* Other
  * ,-----------------------------------------------------------------------------------.
@@ -174,12 +163,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 
-[_OTHER] = {
-  {RESET,  DEBUG,  XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,MU_TOG, XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX},
-  {XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,ENG,    XXXXXXX,XXXXXXX,RUS,    XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX},
-  {XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX},
-  {_______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______}
-},
+[_OTHER] = LAYOUT_ortho_4x12(
+  RESET,  DEBUG,  XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,MU_TOG, XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
+  XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,ENG,    XXXXXXX,XXXXXXX,RUS,    XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
+  XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
+  _______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______)
+,
 
 /* Adjust (Lower + Raise)
  * ,-----------------------------------------------------------------------------------.
