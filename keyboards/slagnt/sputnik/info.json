@@ -1,0 +1,23 @@
+{
+    "keyboard_name": "Sputnik XL",
+    "manufacturer": "Slg",
+    "usb": {
+        "vid": "0xFEED",
+        "pid": "0x1001",
+        "device_version": "0.0.1"
+    },
+    "features": {
+        "rgblight": true
+    },
+    "rgblight": {
+        "led_count": 1,
+        "pin": "GP16",
+        "hue_steps": 10,
+        "saturation_steps": 17,
+        "brightness_steps": 17,
+        "animations": {
+            "knight": true,
+            "rainbow_swirl": true
+        }
+    }
+}

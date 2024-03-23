@@ -1,0 +1,3 @@
+
+AUDIO_ENABLE = no
+FAUXCLICKY_ENABLE = yes
