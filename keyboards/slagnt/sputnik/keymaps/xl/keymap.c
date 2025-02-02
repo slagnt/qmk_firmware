@@ -42,7 +42,7 @@ enum custom_keycodes {
 //  * | Tab  |   A  |   O  |   E  |   U  |   I  |   D  |   H  |   T  |   N  |   S  |      |
 //  * |      | Ctrl |      |      | Ctrl |      |      | Ctrl |      |      | Ctrl |      |
 //  * '------+------+------+------+------+------|------+------+------+------+------+------'
-//  *        |      |   Q  |   J  |   K  |   X  |   B  |   M  |   W  |   V  |   Z  |
+//  *        |   S  |   Q  |   J  |   K  |   X  |   B  |   M  |   W  |   V  |   Z  |
 //  *        |  Alt |      |      |  Alt |      |      |  Alt |      |      |  Alt |
 //  *        '------+------+------+------+------+------+------+------+------+------'
 //  *                      |      |  BS  | Space| Space|Return|      |
@@ -50,8 +50,8 @@ enum custom_keycodes {
 //  *                      '-----------------------------------------'
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_DVORAK] = LAYOUT(
-    KC_ESC, LGUI_T(KC_X), KC_C, KC_V, LGUI_T(KC_P), KC_Y, KC_F, RGUI_T(KC_G), KC_C, KC_R, RGUI_T(KC_L), XXXXXXX,
-    KC_TAB, LCTL_T(KC_A), KC_O, KC_E, LCTL_T(KC_U), KC_I, KC_D, RCTL_T(KC_H), KC_T, KC_N, RCTL_T(KC_S), XXXXXXX,
+    KC_ESC, LGUI_T(KC_X), KC_C, KC_V, LGUI_T(KC_P), KC_Y, KC_F, RGUI_T(KC_G), KC_C, KC_R, RGUI_T(KC_L), KC_LPRN,
+    KC_TAB, LCTL_T(KC_A), KC_O, KC_E, LCTL_T(KC_U), KC_I, KC_D, RCTL_T(KC_H), KC_T, KC_N, RCTL_T(KC_S), KC_RPRN,
             LALT_T(KC_S), KC_Q, KC_J, LALT_T(KC_K), KC_X, KC_B, RALT_T(KC_M), KC_W, KC_V, RALT_T(KC_Z),
 
      KC_LSFT, LT(_PUNCT, KC_BSPC), LT(_NUMBER, KC_SPC), LT(_NUMBER, KC_SPC), LT(_NAV, KC_ENT), KC_RSFT
@@ -115,9 +115,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //  *                      |      |      |      |      |      |      |
 //  *                      '-----------------------------------------'
   [_NAV] = LAYOUT(
-    _______,LGUI_T(XXXXXXX),KC_VOLU,ENG,    LGUI_T(XXXXXXX),GENPASS,LCTL(KC_HOME),KC_HOME,        KC_PGDN,      KC_PGUP,    KC_END,         LCTL(KC_END),
-    _______,LCTL_T(XXXXXXX),KC_VOLD,RUS,    LCTL_T(XXXXXXX),PASS1,  LCTL(KC_LEFT),RCTL_T(KC_LEFT),KC_DOWN,      KC_UP,      RCTL_T(KC_RGHT),LCTL(KC_RGHT),
-            LALT_T(XXXXXXX),KC_MUTE,DB_TOGG,LALT_T(XXXXXXX),PASS2,  KC_DEL,       LALT(KC_LEFT),  LALT(KC_DOWN),LALT(KC_UP),LALT(KC_RGHT),
+    _______,LGUI_T(XXXXXXX),KC_AUDIO_VOL_UP,    ENG,    LGUI_T(XXXXXXX),GENPASS,LCTL(KC_HOME),KC_HOME,        KC_PGDN,      KC_PGUP,    KC_END,         LCTL(KC_END),
+    _______,LCTL_T(XXXXXXX),KC_AUDIO_VOL_DOWN,  RUS,    LCTL_T(XXXXXXX),PASS1,  LCTL(KC_LEFT),RCTL_T(KC_LEFT),KC_DOWN,      KC_UP,      RCTL_T(KC_RGHT),LCTL(KC_RGHT),
+            LALT_T(XXXXXXX),KC_AUDIO_MUTE,      DB_TOGG,LALT_T(XXXXXXX),PASS2,  KC_DEL,       LALT(KC_LEFT),  LALT(KC_DOWN),LALT(KC_UP),LALT(KC_RGHT),
                                             _______,_______,_______,_______,_______,_______
   )/*,
 
