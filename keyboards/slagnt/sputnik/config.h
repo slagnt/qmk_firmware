@@ -1,0 +1,29 @@
+#pragma once
+
+#define MATRIX_ROWS 8
+#define MATRIX_COLS 5
+
+#define MATRIX_ROW_PINS { GP5, GP6, GP7, GP8, GP27, GP26 , GP15, GP14 }
+#define MATRIX_COL_PINS { GP9, GP10, GP11, GP12, GP13 }
+
+#undef QMK_ESC_OUTPUT
+#undef DIODE_DIRECTION
+#define DIODE_DIRECTION ROW2COL
+
+#define NO_MUSIC_MODE
+
+//#define DOUBLE_REPORT
+
+// #define WS2812_PIO_USE_PIO1
+//#define RGB_DI_PIN GP16
+//#define RGBLED_NUM 1
+// #define RGBLIGHT_LAYERS
+// #define NOP_FUDGE 1
+
+// #define RGBLIGHT_DEFAULT_VAL 1
+// #define RGBLIGHT_DEFAULT_HUE 180
+// #define RGBLIGHT_MAX_LAYERS 8
+// #define RGBLIGHT_LAYERS_OVERRIDE_RGB_OFF
+// #define RGBLIGHT_LIMIT_VAL 100
+
+// #define TAP_CODE_DELAY 100
