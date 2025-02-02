@@ -5,3 +5,5 @@ qmk compile -kb slagnt/sputnik -km xl
 qmk config user.keyboard=slagnt/sputnik
 
 qmk config user.keymap=xl
+
+qmk compile -kb slagnt/sputnik -km a
